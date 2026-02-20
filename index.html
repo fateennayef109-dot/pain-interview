@@ -155,8 +155,9 @@
     background: var(--accent-dim); border: 1px solid rgba(200,169,110,0.22);
     border-radius: 16px; padding: 22px 24px; text-align: center;
   }
-  .end-card h3 { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: 1.1rem; color: var(--accent); margin-bottom: 6px; }
+  .end-card h3 { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: 1.1rem; color: var(--accent); margin-bottom: 8px; }
   .end-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+  .end-card .email-status { font-size: 0.82rem; margin-top: 6px; }
 
   .copy-btn {
     margin-top: 14px; background: var(--accent); color: #0d0f14;
@@ -199,92 +200,168 @@
 
 </div>
 <script>
+// ── QUESTIONS ────────────────────────────────────────────────────────────────
 const QUESTIONS = [
   {
     section: "Identity & Soul",
-    q: `Let's start at the core. If you had to describe the Centre in exactly 3 words — not what it does, but the feeling it gives off — what would those words be? For example: rigorous, human, pioneering. Take your time with this one, it shapes everything that follows.`
+    q: "Let's start at the core. If you had to describe the Centre in exactly 3 words — not what it does, but the feeling it gives off — what would those words be? For example: rigorous, human, pioneering. Take your time with this one, it shapes everything that follows.",
+    ack: [
+      "Those words say a lot — that sense of {answer} is a powerful foundation to build a visual identity on.",
+      "Interesting choices. {answer} already tells a clear story about how the Centre wants to be perceived.",
+      "That's a strong set. {answer} — each of those words will directly inform the design direction."
+    ]
   },
   {
     section: "Identity & Soul",
-    q: `Imagine the Centre as a person walking into a room. How do they carry themselves? How do they speak — are they the confident scientist at the whiteboard, the empathetic clinician who sits with patients, the quiet visionary who sees what others miss? Paint me a picture.`
+    q: "Imagine the Centre as a person walking into a room. How do they carry themselves? How do they speak — are they the confident scientist at the whiteboard, the empathetic clinician who sits with patients, the quiet visionary who sees what others miss?",
+    ack: [
+      "That's a vivid picture — and a really useful one for a designer to understand the tone.",
+      "That character comes through clearly. It'll be important to make sure the visual identity reflects that same presence.",
+      "That kind of clarity about personality is exactly what separates a good rebrand from a great one."
+    ]
   },
   {
     section: "Identity & Soul",
-    q: `What would be lost if the Centre disappeared tomorrow? Not in terms of research output — but what gap would exist in the world, in people's lives?`
+    q: "What would be lost if the Centre disappeared tomorrow? Not in terms of research output — but what gap would exist in the world, in people's lives?",
+    ack: [
+      "That's the kind of answer that should be on the website. It captures something essential.",
+      "That gap you're describing — that's the Centre's real value proposition, and it's more compelling than any list of publications.",
+      "Powerful. That sense of purpose is what the new identity needs to radiate."
+    ]
   },
   {
     section: "Logo & Iconography",
-    q: `When you think of the Centre's work — pain, the brain, sensory experience, human connection — what images, shapes, or symbols naturally come to mind? Don't filter yourself, nothing is too abstract or too literal.`
+    q: "When you think of the Centre's work — pain, the brain, sensory experience, human connection — what images, shapes, or symbols naturally come to mind? Don't filter yourself, nothing is too abstract or too literal.",
+    ack: [
+      "Some really interesting territory there — a designer will find a lot to work with in what you just described.",
+      "That mix of the literal and the abstract is actually where the best logomarks tend to come from.",
+      "Good — those raw associations are exactly what we need before any design decisions are made."
+    ]
   },
   {
     section: "Logo & Iconography",
-    q: `Many neuroscience and pain research centres lean on predictable imagery — brain silhouettes, neural networks, DNA strands. Does any of that feel right for you, or does it feel too generic? Are there symbols from completely different fields — nature, architecture, mathematics — that resonate more with what you do?`
+    q: "Many pain and neuroscience centres lean on predictable imagery — brain silhouettes, neural networks, DNA strands. Does any of that feel right for you, or does it feel too generic? Are there symbols from completely different fields — nature, architecture, mathematics — that resonate more?",
+    ack: [
+      "That instinct to move away from the obvious is usually the right one — the most memorable marks tend to come from unexpected places.",
+      "Noted on what to avoid. That clarity is just as valuable as knowing what you want.",
+      "That's a useful distinction — and it gives the designer real creative freedom to find something original."
+    ]
   },
   {
     section: "Logo & Iconography",
-    q: `For the logo mark itself: do you want a standalone symbol that can exist without the name (think Nike or Apple), a wordmark where the name is the logo, or a combination of both? And should it feel geometric and precise, or more organic and fluid?`
+    q: "For the logo mark itself: do you want a standalone symbol that can exist without the name — like Nike or Apple — a wordmark where the name is the logo, or a combination of both? And should it feel geometric and precise, or more organic and fluid?",
+    ack: [
+      "That direction makes sense for where the Centre is right now — a combination mark gives flexibility across different contexts.",
+      "A wordmark can be incredibly powerful when the typography is right. Good call.",
+      "Geometric vs organic is one of the most fundamental decisions in logo design — knowing your preference early saves a lot of back and forth."
+    ]
   },
   {
     section: "Logo & Iconography",
-    q: `What do you specifically dislike about the current logo — the font, the colour, the icon, the proportions, the overall feeling it gives? Be as direct as you like. This is exactly the feedback that makes a rebrand work.`
+    q: "What do you specifically dislike about the current logo — the font, the colour, the icon, the proportions, the overall feeling it gives? Be as direct as you like. This is exactly the feedback that makes a rebrand successful.",
+    ack: [
+      "That's really useful — knowing what's broken is half the battle.",
+      "Brutal honesty is the best brief. Everything you just said goes straight into the designer's notes.",
+      "Good — that kind of specific feedback will save weeks of iteration."
+    ]
   },
   {
     section: "Colour",
-    q: `Colour is one of the most powerful brand signals. In medical and neuroscience branding specifically, research shows it carries heavy psychological associations. When you imagine the Centre's visual world, what colours come to mind instinctively? And equally important: are there any colours that feel completely wrong — too clinical, too cold, too corporate?`
+    q: "Colour is one of the most powerful brand signals. When you imagine the Centre's new visual world, what colours come to mind instinctively? And equally important: are there any colours that feel completely wrong — too clinical, too cold, too corporate?",
+    ack: [
+      "Colour instincts are often more reliable than colour theory — what you just described gives us a real emotional direction.",
+      "The colours to avoid are just as important as the colours you want. That's a helpful boundary to set early.",
+      "That combination of attraction and aversion is a great starting point for building a palette."
+    ]
   },
   {
     section: "Colour",
-    q: `I want to share some colour directions that branding research in healthcare and neuroscience suggests work well — what's your gut reaction? Deep navy or midnight blue signals trust, depth, intelligence. Warm slate or charcoal feels modern, serious, approachable. Muted teal or sage reads as calm, scientific, human. A warmer palette — ochre, sand, warm white — conveys warmth, hope, humanity. Any of those feel closer to the truth of the Centre, or further away?`
+    q: "I want to share some colour directions that branding research in healthcare and neuroscience suggests work well — what's your gut reaction to each? Deep navy or midnight blue signals trust, depth, intelligence. Warm slate or charcoal feels modern, serious, approachable. Muted teal or sage reads calm, scientific, human. A warmer palette — ochre, sand, warm white — conveys warmth, hope, humanity. Any of those feel closer to the truth of the Centre?",
+    ack: [
+      "That reaction tells me a lot. The research backs that direction up for medical and neuroscience organisations.",
+      "Interesting — that's a less common choice in this space, which could actually work in your favour.",
+      "Good instinct. That palette direction has strong precedent in credible scientific institutions."
+    ]
   },
   {
     section: "Colour",
-    q: `Should the colour feel bold and confident — owning the space — or restrained and refined, letting the work speak for itself? And do you see a single strong primary colour, or a palette of two or three working together?`
+    q: "Should the colour feel bold and confident — owning the space — or restrained and refined, letting the work speak for itself? And do you see a single strong primary colour, or a palette of two or three working together?",
+    ack: [
+      "Restraint often communicates more confidence than boldness in academic and medical branding. Good instinct.",
+      "A bold single colour can be very ownable — especially if no one else in your space is using it.",
+      "A two-colour palette with one dominant and one accent tends to be the most versatile for institutions like this."
+    ]
   },
   {
     section: "Typography & Brand Voice",
-    q: `Typography carries as much personality as colour. Research in medical branding shows serif fonts — the kind you see in academic journals — signal authority and trust. Clean sans-serifs signal modernity and accessibility. Many strong brands pair both. When you read a headline from the Centre, what should the type feel like: classic and authoritative, modern and clean, or a confident bridge between the two?`
+    q: "Typography carries as much personality as colour. Research in medical branding shows serif fonts signal authority and trust, while clean sans-serifs signal modernity and accessibility. Many strong brands pair both. When you read a headline from the Centre, what should the type feel like: classic and authoritative, modern and clean, or a confident bridge between the two?",
+    ack: [
+      "That preference will shape every headline, every publication, every slide deck the Centre produces.",
+      "The bridge approach is increasingly common in research institutions — it lets you speak to both peers and the public.",
+      "A strong type system is often what makes an academic brand feel modern without losing credibility."
+    ]
   },
   {
     section: "Typography & Brand Voice",
-    q: `Now let's talk about how the Centre speaks — its voice. If you had to describe the tone of every piece of writing on the new site, which direction feels closest: precise and academic (peer to peer), warm and accessible (speaking to patients and the public), or a confident bridge between both? Are there any words, phrases, or ways of talking about the Centre that you want to retire completely?`
+    q: "Now let's talk about how the Centre speaks — its voice. Which direction feels closest: precise and academic, warm and accessible, or a confident bridge between both? And are there any words, phrases, or ways of talking about the Centre that you want to retire completely?",
+    ack: [
+      "Voice is often the last thing organisations think about and the first thing audiences notice. Good to define it clearly.",
+      "Those phrases to retire are gold — knowing what sounds wrong is just as useful as knowing what sounds right.",
+      "That voice direction will inform not just the website but every piece of communication the Centre puts out."
+    ]
   },
   {
     section: "Competitors & References",
-    q: `Think about other pain research groups, neuroscience centres, or university labs — in Canada or internationally. Are there any whose brand, visual identity, or reputation you genuinely admire? And are there any you specifically want to be visually or tonally different from?`
+    q: "Think about other pain research groups, neuroscience centres, or university labs — in Canada or internationally. Are there any whose brand, visual identity, or reputation you genuinely admire? And are there any you specifically want to be visually or tonally different from?",
+    ack: [
+      "Knowing who you admire and who you want to distance yourself from is one of the most useful inputs a designer can have.",
+      "That competitive awareness will help position the Centre's identity clearly in a crowded space.",
+      "Useful benchmarks — both as inspiration and as a reminder of what to avoid."
+    ]
   },
   {
     section: "Competitors & References",
-    q: `Now think broader — outside academia entirely. Are there any organisations, companies, or brands in any field whose visual identity or communication style you find compelling? A tech company, a cultural institution, a publication, a clinic. What draws you to them?`
+    q: "Now think broader — outside academia entirely. Are there any organisations, companies, or brands in any field whose visual identity or communication style you find compelling? A tech company, a cultural institution, a publication, a clinic. What draws you to them?",
+    ack: [
+      "Cross-industry references are often where the most original ideas come from. Good ones.",
+      "That's an interesting set of references — there's a clear aesthetic sensibility running through them.",
+      "Those references tell me something important about the level of design sophistication you're aiming for."
+    ]
   },
   {
     section: "Competitors & References",
-    q: `If you had to place the Centre on a spectrum — on one end, a prestigious traditional academic institution (Johns Hopkins, the Salk Institute), on the other, a modern purpose-driven organisation (the Chan Zuckerberg Initiative, a high-design research nonprofit) — where does the Centre sit today, and where do you want it to sit?`
+    q: "If you had to place the Centre on a spectrum — on one end, a prestigious traditional academic institution like Johns Hopkins or the Salk Institute, on the other, a modern purpose-driven organisation like the Chan Zuckerberg Initiative — where does the Centre sit today, and where do you want it to sit?",
+    ack: [
+      "That gap between where you are and where you want to be is exactly what the rebrand needs to close.",
+      "That's a clear and honest positioning. Most organisations struggle to articulate that gap.",
+      "Knowing that aspiration gives the designer a specific target to aim for — not just aesthetically but strategically."
+    ]
   },
   {
     section: "Constraints & Final Thoughts",
-    q: `Practically speaking — does the new identity need to visually connect to the University of Toronto in any way, such as referencing their colours or seal? Or does the Centre have the freedom to stand fully on its own?`
+    q: "Practically speaking — does the new identity need to visually connect to the University of Toronto in any way, such as referencing their colours or seal? Or does the Centre have the freedom to stand fully on its own?",
+    ack: [
+      "That constraint — or that freedom — will significantly shape what's possible. Good to know now.",
+      "Having that autonomy is a real asset. It means the designer isn't working within someone else's system.",
+      "Understood. That affiliation still matters but doesn't have to dictate the design — there are elegant ways to reference it."
+    ]
   },
   {
     section: "Constraints & Final Thoughts",
-    q: `Last question, and it matters: is there anything about the current identity — a colour, a phrase, a feeling — that you actually want to keep? Sometimes there's something worth protecting in what already exists. And is there anything else about this rebrand, something we haven't touched on, that you want me to know before we begin?`
+    q: "Last question, and it matters: is there anything about the current identity — a colour, a phrase, a feeling — that you actually want to keep? And is there anything else about this rebrand, something we haven't touched on, that you want me to know?",
+    ack: [
+      "Thank you for that. Knowing what to preserve is just as important as knowing what to change.",
+      "That last point is really valuable context — it's exactly the kind of thing that often gets missed.",
+      "Perfect. That rounds out the picture beautifully."
+    ]
   }
 ];
 
 const TOTAL = QUESTIONS.length;
 
-const SYSTEM_PROMPT = `You are a senior brand strategist conducting a focused, intelligent brand discovery interview for a pain and neuroscience research centre at the University of Toronto that is undergoing a full rebrand. Your role is to listen carefully, respond with genuine warmth and intelligence, and guide the interviewee through the questions naturally.
-
-Rules:
-- Ask only ONE question per turn. Never stack questions.
-- After each answer, give a specific, thoughtful acknowledgment (1–2 sentences) that shows you genuinely heard what they said. Reference something concrete from their answer. Never say "great answer" or "that's fascinating."
-- Your tone: calm, intelligent, editorial, warm. Like a trusted creative director — not a chatbot.
-- Never break character. Never mention being an AI.
-- Do not give design opinions during the interview. Draw out their vision, not yours.
-- When given a hidden instruction in brackets at the end of a user message, follow it silently.`;
-
-let history    = [];
-let allAnswers = [];
+// ── STATE ────────────────────────────────────────────────────────────────────
 let currentQ   = 0;
+let allAnswers = [];
 let busy       = false;
 let done       = false;
 
@@ -295,6 +372,7 @@ const progFill   = document.getElementById('progressFill');
 const progCount  = document.getElementById('progressCount');
 const hint       = document.getElementById('hint');
 
+// ── HELPERS ──────────────────────────────────────────────────────────────────
 function setProgress(n) {
   progFill.style.width = Math.round((n / TOTAL) * 100) + '%';
   progCount.textContent = `${n} / ${TOTAL}`;
@@ -350,24 +428,24 @@ function enableInput(yes) {
 
 function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-async function callClaude(messages, maxTokens) {
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: maxTokens, system: SYSTEM_PROMPT, messages })
-  });
-  if (!res.ok) throw new Error(`API ${res.status}`);
-  const data = await res.json();
-  return data.content.map(c => c.text || '').join('').trim();
+// Pick a random acknowledgment, inserting the answer snippet naturally
+function getAck(qIndex, answer) {
+  const acks = QUESTIONS[qIndex].ack;
+  const ack  = acks[Math.floor(Math.random() * acks.length)];
+  // Keep answer snippet short — first 6 words
+  const snippet = answer.split(' ').slice(0, 6).join(' ') + (answer.split(' ').length > 6 ? '…' : '');
+  return ack.replace('{answer}', `"${snippet}"`);
 }
 
+// ── FLOW ─────────────────────────────────────────────────────────────────────
 async function startInterview() {
   showTyping();
-  await delay(1300);
+  await delay(1200);
   removeTyping();
+
   const opening = `Hello — and thank you for making time for this. What we do together in the next little while will form the foundation of your rebrand, so there are no right or wrong answers here, only honest ones.\n\nWe'll move through 17 questions across six areas: your centre's identity and soul, the logo and iconography, colour, typography and voice, competitors and references, and finally some practical constraints.\n\nTake as much space as you need with each answer. Let's begin.\n\n${QUESTIONS[0].q}`;
+
   addBubble('ai', opening, QUESTIONS[0].section);
-  history.push({ role: 'assistant', content: opening });
   currentQ = 1;
   setProgress(0);
   enableInput(true);
@@ -376,138 +454,128 @@ async function startInterview() {
 async function handleSend() {
   const text = inputEl.value.trim();
   if (!text || busy || done) return;
+
   busy = true;
   enableInput(false);
 
   const idx = currentQ - 1;
   allAnswers.push({ section: QUESTIONS[idx].section, q: QUESTIONS[idx].q, a: text });
-  history.push({ role: 'user', content: text });
   addBubble('user', text);
   inputEl.value = '';
   inputEl.style.height = 'auto';
 
   showTyping();
-  await delay(700 + Math.random() * 500);
+  await delay(900 + Math.random() * 600);
+  removeTyping();
 
-  try {
-    if (currentQ < QUESTIONS.length) {
-      const nextQ = QUESTIONS[currentQ];
-      const sectionChanged = nextQ.section !== QUESTIONS[currentQ - 1].section;
-      const sectionNote = sectionChanged
-        ? ` After acknowledging, write one brief orienting sentence transitioning into the "${nextQ.section}" section of the interview.`
-        : '';
+  if (currentQ < QUESTIONS.length) {
+    // Acknowledge + ask next question
+    const ack      = getAck(idx, text);
+    const nextQ    = QUESTIONS[currentQ];
+    const sectionChanged = nextQ.section !== QUESTIONS[idx].section;
 
-      const messages = [
-        ...history.slice(0, -1),
-        { role: 'user', content: text + `\n\n[Hidden instruction: Acknowledge this answer warmly and specifically in 1–2 sentences.${sectionNote} Then ask this question exactly: "${nextQ.q}"]` }
-      ];
+    // Build section transition line
+    const transitions = {
+      "Logo & Iconography":        "Now let's get into the logo and iconography.",
+      "Colour":                    "Good. Let's move into colour.",
+      "Typography & Brand Voice":  "Now let's talk about typography and how the Centre speaks.",
+      "Competitors & References":  "Let's look at the competitive landscape.",
+      "Constraints & Final Thoughts": "Almost there — just a couple of practical questions to close."
+    };
 
-      const reply = await callClaude(messages, 480);
-      removeTyping();
-      addBubble('ai', reply, sectionChanged ? nextQ.section : null);
-      history.push({ role: 'assistant', content: reply });
-      currentQ++;
-      setProgress(currentQ - 1);
-      enableInput(true);
-      busy = false;
-
+    let message = ack;
+    if (sectionChanged && transitions[nextQ.section]) {
+      message += `\n\n${transitions[nextQ.section]}\n\n${nextQ.q}`;
     } else {
-      // Last answer — closing message
-      const closingMsgs = [
-        ...history.slice(0, -1),
-        { role: 'user', content: text + `\n\n[Hidden instruction: Acknowledge their final answer specifically. Then write a warm 2–3 sentence closing letting them know the interview is complete and their brand brief is being generated.]` }
-      ];
-      const closing = await callClaude(closingMsgs, 280);
-      removeTyping();
-      addBubble('ai', closing);
-      history.push({ role: 'assistant', content: closing });
-
-      // Generate brand brief
-      showTyping();
-      await delay(900);
-      const summary = await callClaude([{ role: 'user', content: buildSummaryPrompt() }], 1400);
-      removeTyping();
-
-      window._summary = summary;
-      done = true;
-      setProgress(TOTAL);
-
-      // Auto-send email via EmailJS
-      let emailStatus = 'sending';
-      emailjs.send('service_l5n4d0j', 'template_r32nl1g', { brief: summary })
-        .then(() => { emailStatus = 'sent'; updateCard(); })
-        .catch(() => { emailStatus = 'failed'; updateCard(); });
-
-      const card = document.createElement('div');
-      card.className = 'end-card';
-      card.id = 'endCard';
-      card.innerHTML = `
-        <h3>Brand Brief Ready</h3>
-        <p id="emailNote">Sending brief by email...</p>
-        <p style="font-size:0.78rem;color:var(--muted);margin-top:4px">You can also copy it manually below.</p>
-        <button class="copy-btn" id="copyBtn">Copy Brand Brief</button>
-      `;
-      messagesEl.appendChild(card);
-      scrollBottom();
-      hint.textContent = 'Interview complete';
-
-      function updateCard() {
-        const note = document.getElementById('emailNote');
-        if (!note) return;
-        if (emailStatus === 'sent') {
-          note.style.color = '#c8a96e';
-          note.textContent = 'Brief sent to you by email.';
-        } else {
-          note.style.color = '#e07070';
-          note.textContent = 'Email failed — please use the copy button below.';
-        }
-      }
-
-      document.getElementById('copyBtn').addEventListener('click', function () {
-        navigator.clipboard.writeText(window._summary).then(() => {
-          this.textContent = 'Copied!';
-          setTimeout(() => this.textContent = 'Copy Brand Brief', 2200);
-        });
-      });
+      message += `\n\n${nextQ.q}`;
     }
-  } catch (err) {
-    removeTyping();
-    addBubble('ai', 'Something went wrong — please check your connection and try sending your answer again.');
+
+    addBubble('ai', message, sectionChanged ? nextQ.section : null);
+    currentQ++;
+    setProgress(currentQ - 1);
     enableInput(true);
     busy = false;
+
+  } else {
+    // Last answer — wrap up and send email
+    const ack = getAck(idx, text);
+    const closing = `${ack}\n\nThat's everything — thank you for your time and your honesty. This is a genuinely strong foundation to build from.\n\nYour brand brief is being prepared and sent now…`;
+    addBubble('ai', closing);
+
+    await delay(1200);
+    showTyping();
+    await delay(1000);
+    removeTyping();
+
+    // Build the brief text
+    const brief = buildBrief();
+    window._brief = brief;
+    done = true;
+    setProgress(TOTAL);
+
+    // Send email
+    let emailSent = false;
+    try {
+      await emailjs.send("service_l5n4d0j", "template_r32nl1g", { brief });
+      emailSent = true;
+    } catch(e) {
+      emailSent = false;
+    }
+
+    const card = document.createElement('div');
+    card.className = 'end-card';
+    card.innerHTML = `
+      <h3>Brand Brief Complete</h3>
+      <p>${emailSent
+        ? '<span style="color:var(--accent)">✓ Brief sent to your designer by email.</span>'
+        : '<span style="color:#e07070">Email could not be sent — please use the copy button below.</span>'
+      }</p>
+      <p style="margin-top:6px">You can also copy the full brief manually.</p>
+      <button class="copy-btn" id="copyBtn">Copy Brand Brief</button>
+    `;
+    messagesEl.appendChild(card);
+    scrollBottom();
+    hint.textContent = 'Interview complete';
+
+    document.getElementById('copyBtn').addEventListener('click', function () {
+      navigator.clipboard.writeText(window._brief).then(() => {
+        this.textContent = 'Copied!';
+        setTimeout(() => this.textContent = 'Copy Brand Brief', 2200);
+      });
+    });
   }
 }
 
-function buildSummaryPrompt() {
-  let sections = {};
+// ── BRIEF BUILDER ────────────────────────────────────────────────────────────
+function buildBrief() {
+  let out = `PAIN RESEARCH CENTRE — BRAND DISCOVERY BRIEF\n`;
+  out    += `Generated: ${new Date().toLocaleDateString('en-CA', { year:'numeric', month:'long', day:'numeric' })}\n`;
+  out    += `${'─'.repeat(60)}\n\n`;
+
+  let currentSection = '';
   for (const item of allAnswers) {
-    if (!sections[item.section]) sections[item.section] = [];
-    sections[item.section].push(item);
+    if (item.section !== currentSection) {
+      currentSection = item.section;
+      out += `\n${'═'.repeat(60)}\n${currentSection.toUpperCase()}\n${'═'.repeat(60)}\n\n`;
+    }
+    out += `Q: ${item.q}\n\nA: ${item.a}\n\n${'─'.repeat(40)}\n\n`;
   }
-  let raw = '';
-  for (const [sec, items] of Object.entries(sections)) {
-    raw += `\n### ${sec}\n`;
-    for (const i of items) raw += `Q: ${i.q}\nA: ${i.a}\n\n`;
-  }
-  return `You are a senior brand strategist. Based on the following brand discovery interview for a pain and neuroscience research centre at the University of Toronto, write a comprehensive, professional Brand Discovery Brief that a graphic designer can act on immediately.
 
-Structure:
-1. Brand Essence — 1 short paragraph synthesising the soul of the organisation
-2. Identity & Personality — key traits, the "person" they described, what would be lost
-3. Logo & Iconography Direction — symbols mentioned, style (geometric vs organic, wordmark vs icon), what to avoid, what the current logo fails at
-4. Colour Direction — specific directions from their answers + note the research-backed rationale: in healthcare/neuroscience branding, navy/deep blue builds trust and authority; teal/sage signals scientific calm with humanity; warm neutrals (ochre, sand) convey hope and approachability; avoid sterile white-only palettes which read as cold and impersonal
-5. Typography Direction — serif vs sans recommendation based on their answer + note the rationale: serifs (Freight, Garamond, Canela) convey academic authority and trust in medical contexts; geometric sans (Neue Haas, Aktiv Grotesk) signal modern accessibility; a serif/sans pairing is often ideal for research institutions
-6. Brand Voice — tone, how they speak, words or phrases to retire
-7. Competitive Landscape — who they admire, who they want to differ from, where on the traditional-to-modern spectrum they sit
-8. Constraints & Non-negotiables — UofT connection requirements, anything to keep from current identity
-9. Designer Action Items — 5–7 specific, actionable next steps
+  out += `\n${'═'.repeat(60)}\nDESIGNER NOTES\n${'═'.repeat(60)}\n\n`;
+  out += `This brief was completed via a structured brand discovery interview.\n`;
+  out += `All answers are direct and unedited from the client.\n\n`;
+  out += `Recommended next steps:\n`;
+  out += `1. Review Identity & Soul answers to define the brand personality\n`;
+  out += `2. Use Logo & Iconography answers to brief initial mark explorations\n`;
+  out += `3. Build colour palette options based on Colour section direction\n`;
+  out += `4. Select type pairings based on Typography direction\n`;
+  out += `5. Review Competitors section to ensure differentiation\n`;
+  out += `6. Check Constraints section for any non-negotiables before presenting\n`;
 
-Be specific. Reference their actual answers directly. Write in clear professional prose. This is a real working document.
-
-INTERVIEW TRANSCRIPT:
-${raw}`;
+  return out;
 }
 
+// ── EVENTS ───────────────────────────────────────────────────────────────────
 inputEl.addEventListener('input', () => {
   inputEl.style.height = 'auto';
   inputEl.style.height = Math.min(inputEl.scrollHeight, 130) + 'px';
